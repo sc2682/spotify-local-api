@@ -9,6 +9,7 @@ namespace JariZ
     {
         public class ClientVersion
         {
+            public Internal.error error { get; set; }
             public int version { get; set; }
             public string client_version { get; set; }
             public bool running { get; set; }
@@ -16,11 +17,13 @@ namespace JariZ
 
         public class CFID
         {
+            public Internal.error error { get; set; }
             public string token { get; set; }
         }
 
         public class Status
         {
+            public Internal.error error { get; set; }
             public int version { get; set; }
             public string client_version { get; set; }
             public bool playing { get; set; }
@@ -37,9 +40,16 @@ namespace JariZ
             public bool running { get; set; }
         }
 
-
         public class Internal
         {
+            #region Misc
+            public class error
+            {
+                public string type { get; set; }
+                public string message { get; set; }
+            }
+            #endregion
+
             #region Status
             public class open_graph_state
             {
