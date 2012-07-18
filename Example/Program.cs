@@ -22,8 +22,17 @@ namespace Example
             {
                 SpotifyAPI API = new SpotifyAPI(SpotifyAPI.GetOAuth(), "jariz-example.spotilocal.com");
                 Responses.CFID cfid = API.CFID; //It's required to get the contents of API.CFID before doing anything, even if you're not intending to do anything with the CFID
-                
+                if (cfid.error != null)
+                {
+                    Console.WriteLine(string.Format("Spotify returned a error {0} (0x{1})", cfid.error.message, cfid.error.type));
+                    Thread.Sleep(-1);
+                }
                 Responses.Status Current_Status = API.Status;
+                if (cfid.error != null)
+                {
+                    Console.WriteLine(string.Format("Spotify returned a error {0} (0x{1})", cfid.error.message, cfid.error.type));
+                    Thread.Sleep(-1);
+                }
 
                 if (Current_Status.track != null)
                     Console.WriteLine(string.Format("You're listening to {0} - {1} from the album '{2}'", Current_Status.track.track_resource.name, Current_Status.track.artist_resource.name, Current_Status.track.album_resource.name));
