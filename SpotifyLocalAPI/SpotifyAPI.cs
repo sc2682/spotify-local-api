@@ -38,22 +38,22 @@ namespace JariZ
             try
             {
                 string raw = new WebClient().DownloadString("http://open.spotify.com/album/" + uri.Split(new string[] { ":" }, StringSplitOptions.None)[2]);
-                raw = raw.Replace(" ", "");
+                raw = raw.Replace("\t", ""); ;
                 string[] lines = raw.Split(new string[] { "\n" }, StringSplitOptions.None);
                 foreach (string line in lines)
                 {
-                    if (line.StartsWith("<metaproperty=\"og:image\""))
+                    if (line.StartsWith("<meta property=\"og:image\""))
                     {
                         string[] l = line.Split(new string[] { "/" }, StringSplitOptions.None);
-                        return "http://d3rt1990lpmkn.cloudfront.net/640/" + l[4].Replace("\"", "");
+                        return "http://o.scdn.co/640/" + l[4].Replace("\"", "").Replace(">", "");
                     }
                 }
             }
             catch
             {
-                return "nope";
+                return "";
             }
-            return "nope";
+            return "";
         }
 
 
